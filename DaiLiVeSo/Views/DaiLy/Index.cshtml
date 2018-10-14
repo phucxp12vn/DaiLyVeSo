@@ -1,0 +1,78 @@
+﻿@model PagedList.IPagedList<Model.EF.DaiLy>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="x_panel">
+
+        <div class="x_title">
+            <h2>Danh sách đại lý</h2>
+
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Mã Đại Lý</th>
+                        <th>Tên Đại Lý</th>
+                        <th>Địa Chỉ</th>
+                        <th>Sđt</th>
+                        <th>Tình trạng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr id="row_@item.MaDaiLy">
+                        <td>
+                            @if (item.Flag == true)
+                            {
+                                <a href="/DaiLy/Edit/@item.MaDaiLy">Sửa ||</a>
+                                @Ajax.ActionLink("Khóa", "Delete", new { @id = item.MaDaiLy }, new AjaxOptions
+                            {
+                                Confirm = "Bạn muốn tạm khóa bản ghi này?",
+                                OnComplete = "location.reload(true)",
+                                HttpMethod = "Delete"
+
+                            })
+                            }
+                            else
+                            {
+                                @Ajax.ActionLink("Bật", "UnDelete", new { @id = item.MaDaiLy }, new AjaxOptions
+                                     {
+                                         Confirm = "Bạn muốn bật bản ghi này?",
+                                         OnComplete = "location.reload(true)",
+                                         HttpMethod = "Delete"
+
+                                     })
+                            }
+                        </td>
+                        <td>@item.MaDaiLy</td>
+                        <td>@item.TenDaiLy</td>
+                        <td>@item.DiaChi</td>
+                        <td>@item.SDT</td>
+                        @if (item.Flag == false || item.Flag == null)
+                        {
+                            <td>Ngừng</td>
+                        }
+                        else if (item.Flag == true)
+                        {
+                            <td>Hoạt động</td>
+                        }
+
+                    </tr>
+
+                    }
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @TenTimKiem = ViewBag.TenTimKiem }))
+        </div>
+    </div>
+</div>
+

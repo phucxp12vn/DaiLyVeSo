@@ -1,0 +1,79 @@
+﻿@model PagedList.IPagedList<Model.EF.PhieuThu>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="x_panel">
+
+        <div class="x_title">
+            <h2>Danh sách phiếu thu</h2>
+
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Mã phiếu thu</th>
+                        <th>Mã đại lý</th>
+                        <th>Số tiền</th>
+                        <th>Ngày thu</th>
+                        <th>Tình trạng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.MaPhieuThu">
+                            <td>
+                                @if (item.Flag == true)
+                                {
+                                    <a href="/PhieuThu/Edit/@item.MaPhieuThu">Sửa ||</a>
+                                    @Ajax.ActionLink("Khóa", "Delete", new { @id = item.MaPhieuThu }, new AjaxOptions
+                                {
+                                    Confirm = "Bạn muốn tạm khóa bản ghi này?",
+                                    OnComplete = "location.reload(true)",
+                                    HttpMethod = "Delete"
+
+                                })
+                                }
+                                else
+                                {
+                                    @Ajax.ActionLink("Bật", "UnDelete", new { @id = item.MaPhieuThu }, new AjaxOptions
+                                         {
+                                             Confirm = "Bạn muốn bật bản ghi này?",
+                                             OnComplete = "location.reload(true)",
+                                             HttpMethod = "Delete"
+
+                                         })
+                                }
+                            </td>
+                            <td>@item.MaPhieuThu</td>
+                            <td>@item.MaDaiLy</td>
+                            <td>@item.SoTienNop</td>
+                            <td>@item.NgayNop</td>
+                            @if (item.Flag == false || item.Flag == null)
+                            {
+                                <td>Khóa</td>
+                            }
+                            else if (item.Flag == true)
+                            {
+                                <td>Hiệu lực</td>
+                            }
+
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @TenTimKiem = ViewBag.TenTimKiem }))
+        </div>
+    </div>
+</div>
+
+
+

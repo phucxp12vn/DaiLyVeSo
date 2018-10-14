@@ -1,0 +1,58 @@
+﻿@model PagedList.IPagedList<Model.EF.PhieuChi>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="x_panel">
+
+        <div class="x_title">
+            <h2>Danh sách phiếu chi</h2>
+
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Mã phiếu chi</th>
+                        <th>Ngày</th>
+                        <th>Số tiền</th>
+                        <th>Nội dung</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.MaPhieuChi">
+                            <td>
+                             
+                                
+                                    <a href="/PhieuChi/Edit/@item.MaPhieuChi">Sửa ||</a>
+                                    @Ajax.ActionLink("Xóa", "Delete", new { @id = item.MaPhieuChi }, new AjaxOptions
+                                {
+                                    Confirm = "Bạn muốn tạm khóa bản ghi này?",
+                                    OnComplete = "$('#row_" + @item.MaPhieuChi + "').remove()",
+                                    HttpMethod = "Delete"
+
+                                })   
+                                
+                            </td>
+                            <td>@item.MaPhieuChi</td>
+                            <td>@item.Ngay</td>
+                            <td>@item.SoTien</td>
+                            <td>@item.NoiDung</td>                          
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @TenTimKiem = ViewBag.TenTimKiem }))
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,176 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Gentelella Alela! | </title>
+    <!-- Bootstrap -->
+    <link href="~/Assets/vendors/" rel="stylesheet">
+
+    <link href="~/Assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/Assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/Assets/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="~/Assets/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="~/Assets/vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+    <!-- Select2 -->
+    <link href="~/Assets/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="~/Assets/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+    <!-- starrr -->
+    <link href="~/Assets/vendors/starrr/dist/starrr.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="~/Assets/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="~/Assets/build/css/custom.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="~/Assets/build/css/style.css" rel="stylesheet">
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- /menu profile quick info -->
+                    <br />
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>Quản lí</h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a><i class="fa fa-shopping-cart"></i> Đại Lý <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="/DaiLy/Index">Danh sách Đại Lý</a></li>
+                                        <li><a href="/DaiLy/Create">Thêm Đại Lý</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-sort-amount-desc"></i> Số Lượng Đăng Kí <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="/SoLuongDangKi/Index">Danh Sách Lượt Đăng Kí</a></li>
+                                        <li><a href="/SoLuongDangKi/Create">Thêm Đăng Ký</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a><i class="fa fa-sticky-note"></i> Loại Vé <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="/LoaiVeSo/Index">Danh Sách Loại Vé </a></li>
+                                        <li><a href="/LoaiVeSo/Create">Thêm Loại Vé</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-cubes"></i> Giải thưởng <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="/Giai/Index">Danh sách Giải</a></li>
+                                        <li><a href="/Giai/Create">Thêm Giải</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-signal"></i> Kết Quả <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="/KetQua/Index">Danh Sách Kết Quả</a></li>
+                                        <li><a href="/KetQua/Create">Thêm Kết Quả</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-money"></i> Phiếu Thu <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="/PhieuThu/Index">Danh Sách Phiếu Thu</a></li>
+                                        <li><a href="/PhieuThu/Create">Thêm Phiếu Thu</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-edit"></i> Phiếu Chi <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="/PhieuChi/Index">Danh Sách Phiếu Chi</a></li>
+                                        <li><a href="/PhieuChi/Create">Thêm Phiếu Chi</a></li>
+                                    </ul>
+                                </li>
+
+
+
+
+
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+
+                </div>
+            </div>
+
+            <!-- page content -->
+            <div class="right_col" role="main">
+                @*Nội dung ở chỗ này*@
+                @if (TempData["AlertMessage"] != null)
+                {
+                    <div id="AlertBox" class="alert @TempData["AlertType"] hide" style="text-align: center;">
+                        @TempData["AlertMessage"]
+                    </div>
+                }
+
+                @RenderBody()
+            </div>
+            <!-- /page content -->
+
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="~/Assets/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/Assets/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Assets/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="~/Assets/vendors/nprogress/nprogress.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="~/Assets/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="~/Assets/vendors/iCheck/icheck.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="~/Assets/vendors/moment/min/moment.min.js"></script>
+    <script src="~/Assets/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap-wysiwyg -->
+    <script src="~/Assets/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="~/Assets/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+    <script src="~/Assets/vendors/google-code-prettify/src/prettify.js"></script>
+    <!-- jQuery Tags Input -->
+    <script src="~/Assets/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+    <!-- Switchery -->
+    <script src="~/Assets/vendors/switchery/dist/switchery.min.js"></script>
+    <!-- Select2 -->
+    <script src="~/Assets/vendors/select2/dist/js/select2.full.min.js"></script>
+    <!-- Parsley -->
+    <script src="~/Assets/vendors/parsleyjs/dist/parsley.min.js"></script>
+    <!-- Autosize -->
+    <script src="~/Assets/vendors/autosize/dist/autosize.min.js"></script>
+    <!-- jQuery autocomplete -->
+    <script src="~/Assets/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+    <!-- starrr -->
+    <script src="~/Assets/vendors/starrr/dist/starrr.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="~/Assets/build/js/custom.js"></script>
+    <!-- minor -->
+    <script src="~/Assets/vendors/validator/index.js"></script>
+
+</body>
+</html>
