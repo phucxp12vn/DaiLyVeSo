@@ -63,6 +63,7 @@
     <Compile Include="DAO\GiaiDao.cs" />
     <Compile Include="DAO\KetQuaDao.cs" />
     <Compile Include="DAO\LoaiVeSoDao.cs" />
+    <Compile Include="DAO\PhatHanhDao.cs" />
     <Compile Include="DAO\PhieuChiDao.cs" />
     <Compile Include="DAO\PhieuThuDao.cs" />
     <Compile Include="DAO\SoLuongDKDao.cs" />

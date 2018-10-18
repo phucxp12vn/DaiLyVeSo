@@ -9,13 +9,15 @@ namespace Model.EF
     [Table("PhatHanh")]
     public partial class PhatHanh
     {
+
         [Key]
-        [Column(Order = 0)]
+        [StringLength(20)]
+        public string ID { get; set; }
+
         [StringLength(20)]
         public string MaDaiLy { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
+    
         [StringLength(20)]
         public string MaLoaiVeSo { get; set; }
 

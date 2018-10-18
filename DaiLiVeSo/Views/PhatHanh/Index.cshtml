@@ -1,0 +1,89 @@
+﻿@model PagedList.IPagedList<Model.EF.PhatHanh>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="x_panel">
+
+        <div class="x_title">
+            <h2>Danh sách phát hành</h2>
+
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Mã</th>
+                        <th>Mã loại vé</th>
+                        <th>Mã đại lý</th>
+                        <th>Số lượng giao</th>
+                        <th>Ngày nhận</th>
+                        <th>Số lượng bán</th>
+                        <th>Doanh thu </th>
+                        <th>Hoa Hồng</th>
+                        <th>Tiền thu</th>
+                        <th>Tình trạng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr id="row_@item.ID">
+                        <td>
+                            @if (item.Flag == true)
+                            {
+                                <a href="/PhatHanh/Edit/@item.ID">Sửa ||</a>
+                                @Ajax.ActionLink("Khóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                            {
+                                Confirm = "Bạn muốn tạm khóa bản ghi này?",
+                                OnComplete = "location.reload(true)",
+                                HttpMethod = "Delete"
+
+                            })
+                            }
+                            else
+                            {
+                                @Ajax.ActionLink("Bật", "UnDelete", new { @id = item.ID }, new AjaxOptions
+                                     {
+                                         Confirm = "Bạn muốn bật bản ghi này?",
+                                         OnComplete = "location.reload(true)",
+                                         HttpMethod = "Delete"
+
+                                     })
+                            }
+                        </td>
+                        <td>@item.ID</td>
+                        <td>@item.MaLoaiVeSo</td>
+                        <td>@item.MaDaiLy</td>
+                        <td>@item.SoLuong</td>
+                        <td>@item.NgayNhan</td>
+                        <td>@item.SLBan</td>
+                        <td>@item.DoanhThuDPH</td>
+                        <td>@item.HoaHong</td>
+                        <td>@item.TienThanhToan</td>
+                        @if (item.Flag == false || item.Flag == null)
+                        {
+                            <td>Khóa</td>
+                        }
+                        else if (item.Flag == true)
+                        {
+                            <td>Hiệu lực</td>
+                        }
+
+                    </tr>
+
+                    }
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page, @TenTimKiem = ViewBag.TenTimKiem }))
+        </div>
+    </div>
+</div>
+
+

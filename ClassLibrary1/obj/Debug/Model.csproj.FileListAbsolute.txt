@@ -13,4 +13,3 @@ C:\Users\Admin\source\repos\DaiLiVeSo\ClassLibrary1\bin\Debug\Model.dll
 C:\Users\Admin\source\repos\DaiLiVeSo\ClassLibrary1\bin\Debug\Model.pdb
 C:\Users\Admin\source\repos\DaiLiVeSo\ClassLibrary1\obj\Debug\Model.dll
 C:\Users\Admin\source\repos\DaiLiVeSo\ClassLibrary1\obj\Debug\Model.pdb
-C:\Users\Admin\source\repos\DaiLiVeSo\ClassLibrary1\obj\Debug\Model.csprojAssemblyReference.cache
