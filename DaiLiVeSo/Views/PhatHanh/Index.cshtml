@@ -38,14 +38,14 @@
                         <td>
                             @if (item.Flag == true)
                             {
-                                <a href="/PhatHanh/Edit/@item.ID">Sửa ||</a>
+                                <a href="/PhatHanh/Edit/@item.ID">Cập nhật ||</a>
                                 @Ajax.ActionLink("Khóa", "Delete", new { @id = item.ID }, new AjaxOptions
                             {
                                 Confirm = "Bạn muốn tạm khóa bản ghi này?",
                                 OnComplete = "location.reload(true)",
                                 HttpMethod = "Delete"
 
-                            })  
+                            })
                             }
                             else
                             {
@@ -63,11 +63,31 @@
                         <td>@item.MaDaiLy</td>
                         <td>@item.SoLuong</td>
                         <td>@item.NgayNhan</td>
-                        <td>@item.SLBan</td>
-                        <td>@item.DoanhThuDPH</td>
+                        @if (item.SLBan == null)
+                        {
+                            <td>Chưa cập nhật</td>
+                        }
+                        else
+                        {
+                            <td>@item.SLBan</td>
+                        }
+                        @if (item.DoanhThuDPH == null)
+                        {
+                            <td>Chưa cập nhật</td>
+                        }
+                        else
+                        {
+                            <td>@item.DoanhThuDPH</td>
+                        }
                         <td>@item.HoaHong</td>
-                        <td>@item.TienThanhToan</td>
-                        @if (item.Flag == false || item.Flag == null)
+                        @if (item.TienThanhToan == null)
+                        {
+                            <td>Chưa cập nhật</td>
+                        }
+                        else
+                        {
+                            <td>@item.TienThanhToan</td>
+                        }                        @if (item.Flag == false || item.Flag == null)
                         {
                             <td>Khóa</td>
                         }

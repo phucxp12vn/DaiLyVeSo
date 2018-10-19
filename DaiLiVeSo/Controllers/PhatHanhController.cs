@@ -84,8 +84,11 @@ namespace DaiLiVeSo.Controllers
             {
                 var dao = new PhatHanhDao();
                 phatHanh.Flag = true;
-                decimal slg = TinhToanSLPhatTheoDaiLy(phatHanh.MaDaiLy, phatHanh.MaLoaiVeSo, (DateTime)phatHanh.NgayNhan);
-                phatHanh.SoLuong = (int)slg;
+                if(phatHanh.SoLuong == null)
+                {
+                    decimal slg = TinhToanSLPhatTheoDaiLy(phatHanh.MaDaiLy, phatHanh.MaLoaiVeSo, (DateTime)phatHanh.NgayNhan);
+                    phatHanh.SoLuong = (int)slg;
+                }
                 string result = dao.Insert(phatHanh);
                 if (result != null)
                 {
