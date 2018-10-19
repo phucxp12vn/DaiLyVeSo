@@ -1,10 +1,9 @@
 ﻿@model Model.EF.PhatHanh
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@using (Html.BeginForm("Edit", "PhatHanh", FormMethod.Post))
+@using (Html.BeginForm("Create", "PhatHanh", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -15,7 +14,7 @@
                 <div class="x_content">
                     <br />
                     <div id="demo-form2" class="form-horizontal form-label-left">
-                        <h2>Cập nhật phát hành.</h2>
+                        <h2>Thêm phát hành.</h2>
                         <hr />
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
@@ -65,16 +64,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Ma-Giai">
-                                Số Lượng Bán <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                @Html.TextBoxFor(model => model.SLBan, new { @class = "form-control col-md-7 col-xs-12" })
-                                @Html.ValidationMessageFor(model => model.SLBan, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Ma-Giai">
-                               Hoa Hồng <span class="required">*</span>
+                                Hoa Hồng <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 @Html.TextBoxFor(model => model.HoaHong, new { @class = "form-control col-md-7 col-xs-12" })
@@ -83,7 +73,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <input type="submit" value="Sửa đổi" class="btn btn-success" />
+                                <input type="submit" value="Tạo" class="btn btn-success" />
                             </div>
                         </div>
                     </div>
@@ -92,8 +82,6 @@
         </div>
     </div>
 }
-
-
 
 
 

@@ -4493,6 +4493,7 @@
     <Content Include="Views\PhieuChi\Create.cshtml" />
     <Content Include="Views\PhatHanh\Index.cshtml" />
     <Content Include="Views\PhatHanh\Edit.cshtml" />
+    <Content Include="Views\PhatHanh\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

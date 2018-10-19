@@ -46,6 +46,11 @@ namespace DaiLiVeSo.Controllers
             {
                 var dao = new PhatHanhDao();
                 pt.Flag = true;
+                if(pt.SLBan != null)
+                {
+                    pt.DoanhThuDPH = pt.SLBan * pt.SLBan;
+                    pt.TienThanhToan = pt.DoanhThuDPH * (1 - (pt.HoaHong / 100));
+                }
                 var result = dao.Update(pt);
                 if (result)
                 {
@@ -58,6 +63,68 @@ namespace DaiLiVeSo.Controllers
             }
             return View("Index");
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            var pt = new PhatHanh();
+            var dao = new PhatHanhDao();
+            pt.ID = dao.AutoGetMa();
+            pt.NgayNhan = DateTime.Now;
+            pt.HoaHong =  10;
+            SetViewBagMaLoaiVe();
+            SetViewBagMaDaiLy();
+            return View(pt);
+        }
+
+        [HttpPost]
+        public ActionResult Create(PhatHanh phatHanh)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new PhatHanhDao();
+                phatHanh.Flag = true;
+                decimal slg = TinhToanSLPhatTheoDaiLy(phatHanh.MaDaiLy, phatHanh.MaLoaiVeSo, (DateTime)phatHanh.NgayNhan);
+                phatHanh.SoLuong = (int)slg;
+                string result = dao.Insert(phatHanh);
+                if (result != null)
+                {
+                    return RedirectToAction("Index", "PhatHanh");
+                }
+            }
+            else
+            {
+                //return RedirectToAction("Create", "PhatHanh");
+                ModelState.AddModelError("", "Thêm loại vé mới không thành công");
+            }
+            return View("Index");
+        }
+
+
+        public decimal TinhToanSLPhatTheoDaiLy(string MaDaiLy, string MaLoaiVeSo, System.DateTime NgayNhan)
+        {
+            var dao = new QLVESODbContext();
+            decimal SLDK = dao.SoLuongDKs.OrderByDescending(m => m.NgayDK).Where(m => m.MaDaiLy == MaDaiLy & System.DateTime.Compare((DateTime) m.NgayDK, NgayNhan) <= 0).Select(m => (int)m.SoLuongDK1).FirstOrDefault();
+            var listTop3 = dao.PhatHanhs.OrderByDescending(m => m.NgayNhan).Where(m => m.MaDaiLy == MaDaiLy  & m.SLBan != null).ToList().Take(3);
+            int count = listTop3.Count();
+            if (count == 0)
+            {
+                return SLDK;
+            }
+            else
+            {
+                decimal sum = 0;
+                foreach (var item in listTop3)
+                {
+                    decimal a = (decimal)item.SLBan;
+                    decimal b = (decimal)item.SoLuong;
+                    sum += a / b;
+                }
+                decimal? getReturn = Math.Round(((decimal)sum * SLDK) / count );
+                return getReturn ?? default(decimal);
+            }
+        }
+
         [HttpDelete]
         public ActionResult Delete(string id)
         {
@@ -73,5 +140,6 @@ namespace DaiLiVeSo.Controllers
             return RedirectToAction("Index");
 
         }
+
     }
 }

@@ -17,7 +17,7 @@ namespace Model.DAO
         }
         public IEnumerable<PhatHanh> listAll(int page, int pageSize)
         {
-            return db.PhatHanhs.OrderByDescending(x => x.NgayNhan).OrderByDescending(x => x.Flag).ToPagedList(page, pageSize);
+            return db.PhatHanhs.OrderByDescending(x => x.NgayNhan).ToPagedList(page, pageSize);
         }
         public string Insert(PhatHanh entity)
         {
@@ -82,6 +82,15 @@ namespace Model.DAO
         public List<DaiLy> ListAllMaDaiLy()
         {
             return db.DaiLies.Where(x => x.Flag == true).ToList();
+        }
+        public String AutoGetMa()
+        {
+            var countrow = db.PhatHanhs.Count();
+            int getcount = countrow + 1;
+            string newmahd = "PH";
+            if (getcount < 10) newmahd = newmahd + "000" + getcount.ToString();
+            else if (getcount < 100) newmahd = newmahd + "00" + getcount.ToString();
+            return newmahd;
         }
     }
 }
